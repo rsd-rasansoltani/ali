@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>شمارش معکوس تا پایان مهلت</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      direction: rtl;
+      background: linear-gradient(to top left, #fdfbfb, #ebedee);
+      text-align: center;
+      padding: 50px 20px;
+      color: #333;
+    }
+    h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+    .timer {
+      font-size: 1.8em;
+      font-weight: bold;
+      color: #0077cc;
+      margin-top: 30px;
+    }
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.5em;
+      }
+      .timer {
+        font-size: 1.5em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>زمان باقی‌مانده تا پایان مهلت علی</h1>
+  <div class="timer" id="countdown">در حال محاسبه...</div>
+
+  <script>
+    // تاریخ پایان: جمعه ۲۷ تیر ۱۴۰۳ ساعت ۲۰:۵۶ معادل با ۱۸ جولای ۲۰۲۵ ساعت ۲۰:۵۶
+    const deadline = new Date("2025-07-18T20:56:00").getTime();
+
+    const countdownEl = document.getElementById("countdown");
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = deadline - now;
+
+      if (distance < 0) {
+        countdownEl.innerHTML = "مهلت تمام شده!";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdownEl.innerHTML = `${days} روز، ${hours} ساعت، ${minutes} دقیقه و ${seconds} ثانیه`;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
